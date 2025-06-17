@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "brave-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "env": {
+        "BRAVE_API_KEY": "BSA6khD_zyN4cup1F-dpJYqSJJ5AeyM"
+      }
+    },
+    "crawl4ai-rag": {
+      "transport": "sse",
+      "url": "https://crawltorag-production.up.railway.app/sse"
+    }
+  }
+}
