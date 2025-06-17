@@ -103,6 +103,22 @@ mcp = FastMCP(
     port=os.getenv("PORT", "8051")
 )
 
+# Add a simple health check endpoint for Railway
+@mcp.get("/")
+async def health_check():
+    """Health check endpoint for Railway deployment."""
+    return {
+        "status": "healthy",
+        "service": "crawl4ai-mcp-server",
+        "transport": os.getenv("TRANSPORT", "sse"),
+        "tools": ["crawl_single_page", "smart_crawl_url", "get_available_sources", "perform_rag_query"]
+    }
+
+@mcp.get("/health")
+async def health():
+    """Alternative health check endpoint."""
+    return {"status": "ok"}
+
 def rerank_results(model: CrossEncoder, query: str, results: List[Dict[str, Any]], content_key: str = "content") -> List[Dict[str, Any]]:
     """
     Rerank search results using a cross-encoder model.
